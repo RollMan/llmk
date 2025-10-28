@@ -236,15 +236,6 @@ target = "%B.ps"
 generated_target = true
 ```
 
-### Overwrite llmk.toml from command line
-Use `-r`, `--overwrite-config` to overwrite some entries in llmk.toml from command line.
-
-```shell
-llmk -r 'source=["another.tex"]'
-```
-
-This would be useful if you use, for example, `subfiles` and specify the source to be typeset.
-
 ## Building and testing
 
 Some maintenance tasks are defined as [Rake](https://github.com/ruby/rake) tasks. To run these tasks, please install the dependencies first:

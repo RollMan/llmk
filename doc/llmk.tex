@@ -193,6 +193,16 @@ further detailed information.
 This suppress most of the messages from the program.
 \end{clopt}
 
+\begin{clopt}{\sopt{s}, \lopt{replace-config-entry}}
+Substitute the given entry with this argument for one on \code{llmk.toml} or
+magic comments. The replacing entry should be \code{\meta{key}=\meta{value}}.
+For example,
+\begin{htcode}
+llmk -r 'source=["another.tex"]'
+\end{htcoe}
+This would be useful if you use, for example, \code{subfiles} and want to specify a path to a source file to be built.
+\end{clopt}
+
 \begin{clopt}{\sopt{s}, \lopt{silent}}
 Silence messages from invoked programs. To be more specific, this redirects
 both standard output and standard error streams to the null device.

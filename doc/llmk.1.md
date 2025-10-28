@@ -26,6 +26,8 @@ If one or more FILE(s) are specified, `llmk` reads the TOML fields or other supp
   Show what would have been executed.
 * `-q`, `--quiet`:
   Suppress warnings and most error messages.
+* `-r`, `--replace-config-entry`:
+  Substitute the given entry of the form `<key>=<value>` for one on `llmk.toml` or magic.
 * `-s`, `--silent`:
   Silence messages from called programs.
 * `-v`, `--verbose`:
