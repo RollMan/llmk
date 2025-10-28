@@ -12,8 +12,10 @@ RUN --mount=type=cache,target=/root/.gem \
     bundle config path /vendor/bundle && \
     bundle install --jobs 4 --retry 3
 RUN --mount=type=cache,target=/root/.gem \
+    --mount=type=cache,target=/tmp/texlive \
     --mount=type=bind,source=.,target=/work,rw=true \
     bundle exec rake setup_unix
+    # TODO: use cache or something properly so that it does not run texlive installation twice.
 RUN --mount=type=cache,target=/root/.gem \
     --mount=type=bind,source=.,target=/work,rw=true \
     bundle exec rake test
