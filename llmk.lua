@@ -844,6 +844,10 @@ function M.parse_toml(toml, file_info)
     step()
   end
 
+  -- update entries from command line args
+  for k, v in next, llmk.config.override do
+      res[k] = v
+  end
   return res
 end
 
@@ -1470,7 +1474,7 @@ local function read_options()
     return tab
   end
 
-  local opts = getopt(arg, 'd')
+  local opts = getopt(arg, 'di')
   for _, tp in pairs(opts) do
     k, v = tp[1], tp[2]
     if #k == 1 then
@@ -1510,6 +1514,9 @@ local function read_options()
     -- dry run
     elseif (curr_arg == '-n') or (curr_arg == '--dry-run') then
       llmk.core.dry_run = true
+    -- config
+    elseif (curr_arg == '-i') or (curr_arg == '--source') then
+      llmk.config.override = {"source" = v}
     -- problem
     else
       llmk.util.err_print('error', 'unknown option: ' .. curr_arg)
