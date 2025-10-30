@@ -1,6 +1,6 @@
 # A ruby enviroment to run tests in spec/
 
-FROM ruby:3.4.7-trixie AS test
+FROM ruby:3.4.7-trixie AS testdev
 WORKDIR /work
 ENV PATH=$PATH:/tmp/texlive/bin/x86_64-linux
 # Assert an environment variable of "GITHUB_ACTIONS" to enable local test.
@@ -19,6 +19,8 @@ RUN --mount=type=cache,target=/root/.gem \
     --mount=type=bind,source=./Gemfile.lock,target=./Gemfile.lock \
     --mount=type=bind,source=./Rakefile,target=./Rakefile \
     bundle exec rake setup_unix
+
+FROM testdev AS test
 RUN --mount=type=cache,target=/root/.gem \
     --mount=type=bind,source=.,target=.,rw=true \
     bundle exec rake test
