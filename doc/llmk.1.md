@@ -23,7 +23,7 @@ If one or more FILE(s) are specified, `llmk` reads the TOML fields or other supp
 * `-h`, `--help`:
   Print this help message.
 * `-i`, `--source`:
-  Substitute the given path for `sources` entry on `llmk.toml` or magic.
+  Substitute the given path for `source` entry on `llmk.toml` or magic.
 * `-n`, `--dry-run`:
   Show what would have been executed.
 * `-q`, `--quiet`:
