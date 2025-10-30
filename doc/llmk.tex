@@ -182,6 +182,13 @@ successfully. When this is specified, all other options and arguments are
 ignored.
 \end{clopt}
 
+\begin{clopt}{\sopt{i}, \lopt{source}}
+Substitute the given argument value for the \code{sources} entry on
+\code{llmk.toml} or magic comments at runtime. This would be useful if you
+use, for example, \code{subfiles} and want to specify a path to a source
+file to be built.
+\end{clopt}
+
 \begin{clopt}{\sopt{n}, \lopt{dry-run}}
 Show what would have been executed without actually invoking the commands. This
 flag is useful if you want to make sure whether your configuration will work as
@@ -191,16 +198,6 @@ further detailed information.
 
 \begin{clopt}{\sopt{q}, \lopt{quiet}}
 This suppress most of the messages from the program.
-\end{clopt}
-
-\begin{clopt}{\sopt{s}, \lopt{replace-config-entry}}
-Substitute the given entry with this argument for one on \code{llmk.toml} or
-magic comments. The replacing entry should be \code{\meta{key}=\meta{value}}.
-For example,
-\begin{htcode}
-llmk -r 'source=["another.tex"]'
-\end{htcoe}
-This would be useful if you use, for example, \code{subfiles} and want to specify a path to a source file to be built.
 \end{clopt}
 
 \begin{clopt}{\sopt{s}, \lopt{silent}}

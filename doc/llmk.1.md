@@ -22,12 +22,12 @@ If one or more FILE(s) are specified, `llmk` reads the TOML fields or other supp
   Activate all debug output (equal to "--debug=all").
 * `-h`, `--help`:
   Print this help message.
+* `-i`, `--source`:
+  Substitute the given path for `sources` entry on `llmk.toml` or magic.
 * `-n`, `--dry-run`:
   Show what would have been executed.
 * `-q`, `--quiet`:
   Suppress warnings and most error messages.
-* `-r`, `--replace-config-entry`:
-  Substitute the given entry of the form `<key>=<value>` for one on `llmk.toml` or magic.
 * `-s`, `--silent`:
   Silence messages from called programs.
 * `-v`, `--verbose`:
