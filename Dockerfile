@@ -8,14 +8,17 @@ ENV PATH=$PATH:/tmp/texlive/bin/x86_64-linux
 ENV GITHUB_ACTIONS=1
 
 RUN --mount=type=cache,target=/root/.gem \
-    --mount=type=bind,source=.,target=/work,rw=true \
+    --mount=type=bind,source=./Gemfile,target=./Gemfile \
+    --mount=type=bind,source=./Gemfile.lock,target=./Gemfile.lock \
+    --mount=type=bind,source=./Rakefile,target=./Rakefile \
+    bundle config set frozen true && \
     bundle config path /vendor/bundle && \
     bundle install --jobs 4 --retry 3
 RUN --mount=type=cache,target=/root/.gem \
-    --mount=type=cache,target=/tmp/texlive \
-    --mount=type=bind,source=.,target=/work,rw=true \
+    --mount=type=bind,source=./Gemfile,target=./Gemfile \
+    --mount=type=bind,source=./Gemfile.lock,target=./Gemfile.lock \
+    --mount=type=bind,source=./Rakefile,target=./Rakefile \
     bundle exec rake setup_unix
-    # TODO: use cache or something properly so that it does not run texlive installation twice.
 RUN --mount=type=cache,target=/root/.gem \
-    --mount=type=bind,source=.,target=/work,rw=true \
+    --mount=type=bind,source=.,target=.,rw=true \
     bundle exec rake test
