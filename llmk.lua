@@ -845,8 +845,10 @@ function M.parse_toml(toml, file_info)
   end
 
   -- update entries from command line args
-  for k, v in next, llmk.config.override do
-      res[k] = v
+  if llmk.cli.config_override then
+      for k, v in next, llmk.cli.config_override do
+          res[k] = v
+      end
   end
   return res
 end
@@ -1516,7 +1518,7 @@ local function read_options()
       llmk.core.dry_run = true
     -- config
     elseif (curr_arg == '-i') or (curr_arg == '--source') then
-      llmk.config.override = {"source" = v}
+      M.config_override = {source = v}
     -- problem
     else
       llmk.util.err_print('error', 'unknown option: ' .. curr_arg)

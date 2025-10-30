@@ -158,14 +158,14 @@ RSpec.describe "Processing example", :type => :aruba do
   end
 
   context "configoverwrite.tex" do
-    before(:each) { use_example "configoverwrite.tex" }
-    before(:each) { run_llmk "-r", "configoverwrite.tex" }
+    before(:each) { use_example "llmk.toml", "configoverwrite.tex" }
+    before(:each) { run_llmk "-v", "-i", "configoverwrite.tex" }
 
     it "should produce configoverwrite.pdf" do
       expect(stderr).to include(info_line_seq 'configoverwrite.tex')
-      expect(stderr).to include(info_line_runcmd 'lualatex', 'configoverwrite.tex')
+      expect(stderr).to include(info_line_runcmd 'xelatex', 'configoverwrite.tex')
 
-      expect(file?('configoverwrite')).to be true
+      expect(file?('configoverwrite.pdf')).to be true
 
       expect(last_command_started).to be_successfully_executed
     end
