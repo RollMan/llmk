@@ -47,13 +47,13 @@
 \RequirePackage{utfsym}
 
 \setmainfont{STIX Two Text}
-\setsansfont{Helvetica Neue}
+\setsansfont{TeX Gyre Heros}
 \setmathfont{STIX Two Math}[StylisticSet=02, StylisticSet=08]
 \setmonofont[StylisticSet={1,3}]{Inconsolatazi4}
 
 % logo
-\newcommand{\logomainfont}{\fontspec{Helvetica Neue}}
-\newcommand{\logosubfont}{\fontspec{Helvetica Neue Thin}}
+\newcommand{\logomainfont}{\fontspec{TeX Gyre Heros}}
+\newcommand{\logosubfont}{\fontspec{TeX Gyre Heros}}
 \input{llmk-logo-code}
 
 % for headings
