@@ -35,10 +35,48 @@ RUN --mount=type=cache,target=/root/.gem \
     --mount=type=bind,source=.,target=.,rw=true \
     bundle exec rake test
 
-FROM devenv AS ctanpkg_build
+FROM devenv AS ctanpkg_dep
+# Dependencies to typeset doc/llmk.tex
+RUN tlmgr install \
+    booktabs \
+    bxtexlogo \
+    datetime \
+    enumitem \
+    fancyvrb \
+    fmtcount \
+    fontspec \
+    greek-fontenc \
+    hologo \
+    inconsolata \
+    koma-script \
+    listings \
+    needspace \
+    newunicodechar \
+    pgf \
+    stix2-otf \
+    tex-gyre \
+    texfot \
+    unicode-math \
+    utfsym \
+    xcolor \
+    xkeyval \
+    xunicode \
+    ;
+RUN fc-cache -fv && \
+    ln -s /opt/texlive/2025/texmf-var/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt update && apt-get --no-install-recommends install -y zip
+
+FROM ctanpkg_dep AS ctanpkg_build
+RUN --mount=type=bind,source=.,target=.,rw=true \
+    cp llmk.lua /usr/bin/llmk && \
+    chmod +x /usr/bin/llmk
 RUN --mount=type=cache,target=/root/.gem \
     --mount=type=bind,source=.,target=.,rw=true \
-    bundle exec rake ctan
+    bundle exec rake ctan && \
+    mkdir -p /obj && \
+    cp ./llmk-1.2.1.zip /obj
 
-FROM ctanpkg_build AS ctanpkg
-COPY --link --from=devenv /work/llmk-1.2.1.zip /
+FROM scratch AS ctanpkg
+COPY --link --from=ctanpkg_build /obj /
