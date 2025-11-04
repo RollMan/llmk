@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe "Showing version", :type => :aruba do
   include_context "messages"
 
-  let(:version) { "1.2.1+rollman.1" }
+  let(:version) { "1.2.1+rollman.1+doc" }
   let(:copyright) { "Copyright 2018-2025" }
 
   let(:version_text) do
